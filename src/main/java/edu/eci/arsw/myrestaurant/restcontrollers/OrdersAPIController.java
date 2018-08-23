@@ -34,7 +34,19 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author hcadavid
  */
-public class OrdersAPIController {
 
-    
+@RestController
+@RequestMapping(value = "/orders")
+public class OrdersAPIController {
+        /*@RequestMapping(method = RequestMethod.GET)
+ 	public ResponseEntity<?> manejadorGetRecursoXX(){
+ 		try {
+ 			//obtener datos que se enviarán a través del API
+ 			return new ResponseEntity<>(data,HttpStatus.ACCEPTED);
+ 		} catch (XXException ex) {
+ 			Logger.getLogger(XXController.class.getName()).log(Level.SEVERE, null, ex);
+ 			return new ResponseEntity<>("Error bla bla bla",HttpStatus.NOT_FOUND);
+ 		}  
+ 	}      
+    */
 }
