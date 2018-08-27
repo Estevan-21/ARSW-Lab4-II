@@ -7,6 +7,7 @@ package edu.eci.arsw.myrestaurant.services;
 
 import edu.eci.arsw.myrestaurant.model.Order;
 import edu.eci.arsw.myrestaurant.model.RestaurantProduct;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -28,5 +29,7 @@ public interface RestaurantOrderServices {
     Set<Integer> getTablesWithOrders();
 
     void releaseTable(int tableNumber) throws OrderServicesException;
+    
+    public Map<Integer, Order> getOrders();
     
 }
