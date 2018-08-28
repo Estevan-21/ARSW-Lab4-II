@@ -30,6 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,15 +42,28 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping(value = "/orders")
+//@RestController
+//@RequestMapping(value = "/orders")
 @Service
 public class OrdersAPIController {        
         @Autowired
         RestaurantOrderServices restaurant;
-        @RequestMapping(method = RequestMethod.GET)        
- 	public ResponseEntity<?> manejadorGetRecursoXX() throws OrdersAPIControllerException{
-            Map<Integer, Order> data = restaurant.getOrders();
-            return new ResponseEntity<>(data,HttpStatus.ACCEPTED);  
+        
+        @RequestMapping(value = "/orders/{idmesa}",method = RequestMethod.GET)          
+ 	public ResponseEntity<?> manejadorGetRecursoXX(@PathVariable int idmesa) {
+            if(restaurant.getTablesWithOrders().contains(idmesa)){
+            //Map<Integer, Order> data = restaurant.getOrders();
+            Order data = restaurant.getTableOrder(idmesa);
+            return new ResponseEntity<>(data,HttpStatus.ACCEPTED); 
+            }  else{ 		
+ 		return new ResponseEntity<>("ERROR 404 \n La orden no existe",HttpStatus.NOT_FOUND);
+            }  
  	}      
-    
+        
+        
+        @RequestMapping(value = "/orders",method = RequestMethod.GET)          
+ 	public ResponseEntity<?> manejadorGetRecursoXX() throws OrdersAPIControllerException{
+            Map<Integer, Order> data = restaurant.getOrders();             
+            return new ResponseEntity<>(data,HttpStatus.ACCEPTED);  
+ 	}   
 }
