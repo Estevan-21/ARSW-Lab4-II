@@ -76,7 +76,7 @@ public class OrdersAPIController {
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		} catch (Exception ex) {
 			Logger.getLogger(OrdersAPIController.class.getName()).log(Level.SEVERE, null, ex);
-			return new ResponseEntity<>("Error bla bla bla",HttpStatus.FORBIDDEN);            
+			return new ResponseEntity<>("Error, no se ha podido agregar la orden",HttpStatus.FORBIDDEN);            
 		}        
 	
 	}
@@ -89,5 +89,17 @@ public class OrdersAPIController {
         }else{ 		
  		return new ResponseEntity<>("ERROR 404 \n La orden no existe",HttpStatus.NOT_FOUND);
             }  
-    }
+        }
+        
+        @RequestMapping(value = "/{idmesa}/add",method = RequestMethod.GET)
+        public ResponseEntity<?> manejadorPutNuevaOrden(@PathVariable int idmesa,@RequestBody String p) throws OrderServicesException {
+            try {                                              
+			Order or = restaurant.getTableOrder(idmesa);
+                        or.addDish(p, 1);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		} catch (Exception ex) {
+			Logger.getLogger(OrdersAPIController.class.getName()).log(Level.SEVERE, null, ex);
+			return new ResponseEntity<>("Error, no se ha podido agregar el producto",HttpStatus.FORBIDDEN);            
+		}   
+        }
 }
