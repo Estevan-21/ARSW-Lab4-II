@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.eci.arsw.myrestaurant.model.Order;
 import edu.eci.arsw.myrestaurant.model.ProductType;
 import edu.eci.arsw.myrestaurant.model.RestaurantProduct;
+import edu.eci.arsw.myrestaurant.services.OrderServicesException;
 import edu.eci.arsw.myrestaurant.services.RestaurantOrderServices;
 import edu.eci.arsw.myrestaurant.services.RestaurantOrderServicesStub;
 import java.util.Hashtable;
@@ -53,8 +54,7 @@ public class OrdersAPIController {
         
         @RequestMapping(value = "/{idmesa}",method = RequestMethod.GET)         
  	public ResponseEntity<?> manejadorGetRecursoXX(@PathVariable int idmesa) {
-            if(restaurant.getTablesWithOrders().contains(idmesa)){
-            //Map<Integer, Order> data = restaurant.getOrders();
+            if(restaurant.getTablesWithOrders().contains(idmesa)){         
             Order data = restaurant.getTableOrder(idmesa);
             return new ResponseEntity<>(data,HttpStatus.ACCEPTED); 
             }  else{ 		
@@ -70,11 +70,9 @@ public class OrdersAPIController {
  	}   
         
         @RequestMapping(method = RequestMethod.POST)	
-	public ResponseEntity<?> manejadorPostRecursoXX(@RequestBody String o){
-		try {      
-                        System.out.println(o);
-                        //Order or = new ObjectMapper().readValue(o, Order.class);                        
-			//restaurant.addNewOrderToTable(or);
+	public ResponseEntity<?> manejadorPostRecursoXX(@RequestBody Order o){
+		try {                                              
+			restaurant.addNewOrderToTable(o);
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		} catch (Exception ex) {
 			Logger.getLogger(OrdersAPIController.class.getName()).log(Level.SEVERE, null, ex);
@@ -82,4 +80,14 @@ public class OrdersAPIController {
 		}        
 	
 	}
+        
+        @RequestMapping(value = "/{idmesa}/total",method = RequestMethod.GET)
+        public ResponseEntity<?> manejadorGetRecursoTotal(@PathVariable int idmesa) throws OrderServicesException {
+            if(restaurant.getTablesWithOrders().contains(idmesa)){         
+            int data = restaurant.calculateTableBill(idmesa);
+            return new ResponseEntity<>("El valor total de la orden número "+idmesa+" es: "+data,HttpStatus.ACCEPTED);  
+        }else{ 		
+ 		return new ResponseEntity<>("ERROR 404 \n La orden no existe",HttpStatus.NOT_FOUND);
+            }  
+    }
 }

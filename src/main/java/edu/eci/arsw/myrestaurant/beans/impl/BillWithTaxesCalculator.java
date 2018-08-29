@@ -6,12 +6,14 @@ import edu.eci.arsw.myrestaurant.beans.BillCalculator;
 import edu.eci.arsw.myrestaurant.beans.TaxesCalculator;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-
+@Service("Taxes")
 public class BillWithTaxesCalculator implements BillCalculator {
 
-
+    @Autowired
+    @Qualifier("Tributary") //Acá se especifica que calculadora quiere inyectarse la "Standard" o la "Tributary"
     TaxesCalculator taxescalc;
 
     @Override

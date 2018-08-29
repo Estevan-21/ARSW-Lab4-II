@@ -9,12 +9,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RestaurantOrderServicesStub implements RestaurantOrderServices {
 
     @Autowired
+    @Qualifier("Taxes") //Acá se especifica que calculadora quiere inyectarse la "Basic" o la "Taxes"
     BillCalculator calc = null;
 
     public RestaurantOrderServicesStub() {
