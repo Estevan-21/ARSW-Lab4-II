@@ -16,6 +16,7 @@
  */
 package edu.eci.arsw.myrestaurant.restcontrollers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.eci.arsw.myrestaurant.model.Order;
 import edu.eci.arsw.myrestaurant.model.ProductType;
 import edu.eci.arsw.myrestaurant.model.RestaurantProduct;
@@ -26,9 +27,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jdk.nashorn.internal.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import static org.springframework.http.converter.json.Jackson2ObjectMapperBuilder.json;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,14 +45,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-//@RestController
-//@RequestMapping(value = "/orders")
+@RequestMapping(value = "/orders")
 @Service
 public class OrdersAPIController {        
         @Autowired
         RestaurantOrderServices restaurant;
         
-        @RequestMapping(value = "/orders/{idmesa}",method = RequestMethod.GET)          
+        @RequestMapping(value = "/{idmesa}",method = RequestMethod.GET)         
  	public ResponseEntity<?> manejadorGetRecursoXX(@PathVariable int idmesa) {
             if(restaurant.getTablesWithOrders().contains(idmesa)){
             //Map<Integer, Order> data = restaurant.getOrders();
@@ -61,9 +63,23 @@ public class OrdersAPIController {
  	}      
         
         
-        @RequestMapping(value = "/orders",method = RequestMethod.GET)          
+        @RequestMapping(method = RequestMethod.GET)          
  	public ResponseEntity<?> manejadorGetRecursoXX() throws OrdersAPIControllerException{
             Map<Integer, Order> data = restaurant.getOrders();             
             return new ResponseEntity<>(data,HttpStatus.ACCEPTED);  
  	}   
+        
+        @RequestMapping(method = RequestMethod.POST)	
+	public ResponseEntity<?> manejadorPostRecursoXX(@RequestBody String o){
+		try {      
+                        System.out.println(o);
+                        //Order or = new ObjectMapper().readValue(o, Order.class);                        
+			//restaurant.addNewOrderToTable(or);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		} catch (Exception ex) {
+			Logger.getLogger(OrdersAPIController.class.getName()).log(Level.SEVERE, null, ex);
+			return new ResponseEntity<>("Error bla bla bla",HttpStatus.FORBIDDEN);            
+		}        
+	
+	}
 }
