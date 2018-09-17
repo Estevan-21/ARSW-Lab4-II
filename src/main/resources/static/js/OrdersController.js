@@ -36,7 +36,7 @@ var apiUrl = "http://localhost:8080/orders";
 var order = document.querySelector(".order");
 
 function getOrders() {  
-        axios.get(apiUrl).then(function (response) {                
+        axios.get('/orders').then(function (response) {                
             var ord=response.data['1'].orderAmountsMap;                      
             setOrder(ord,1)    
             var ord=response.data['3'].orderAmountsMap;  
