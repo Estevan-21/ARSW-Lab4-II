@@ -30,8 +30,6 @@ function newOrder(){
   addOrder(orders);
 }
 function loadOrders(){
-  //addOrder(orders);
-  //addOrder(orders2);
   getOrders();
 }
 
