@@ -102,4 +102,15 @@ public class OrdersAPIController {
 			return new ResponseEntity<>("Error, no se ha podido agregar el producto",HttpStatus.FORBIDDEN);            
 		}   
         }
+        private static final String PATH = "/error";
+
+        @RequestMapping(value = PATH)
+        public String error() {
+            return "Error handling";
+        }
+
+        public String getErrorPath() {
+            return PATH;
+        }
+
 }
