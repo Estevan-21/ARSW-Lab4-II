@@ -26,6 +26,9 @@ function removeOrderById(id){
   node.removeChild(element);
 }
 
+function newOrder(){
+  addOrder(orders);
+}
 function loadOrders(){
   //addOrder(orders);
   //addOrder(orders2);
