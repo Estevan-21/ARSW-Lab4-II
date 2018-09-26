@@ -1,14 +1,18 @@
 var RestControllerModule = (function () {	
 
   var getOrders = function (callback) {
-    axios.get('/orders').then(function (response) {                
+    axios.get('/orders').then(function (response) {
+			console.log(response.data);                  
             var ord=response.data['1'].orderAmountsMap;   
-            OrdersControllerModule.showOrdersByTable(ord);                                   
+            console.log("BIEN2");  
+            callback.onSuccess(ord);                                   
+            console.log("BIEN3");  
             var ord=response.data['3'].orderAmountsMap;
-            OrdersControllerModule.showOrdersByTable(ord);                                                     
+            callback.onSuccess(ord);     
+                                                              
         })
         .catch(function (error) {
-            order.innerHTML = "(There is a problem with our servers. We apologize for the inconvince, please try again later)";            
+            document.innerHTML = "(There is a problem with our servers. We apologize for the inconvince, please try again later)";            
 	});
   };
 

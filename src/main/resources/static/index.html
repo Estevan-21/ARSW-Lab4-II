@@ -3,12 +3,14 @@
 	<head>
 	    <meta charset="UTF-8">
 	    <title>Home</title>
+	    <script src = "https://unpkg.com/axios/dist/axios.min.js " > </script> 
+	    <script src="js/RestaurantRestController.js"></script>	
 	    <script src="js/OrdersController.js"></script>
-	    <script src="js/RestaurantRestController.js"></script>
-	    
+	        
 	</head>
 	<body>
 		<h5>Restaurants App</h5>
+		<div id="table"></div>
 	</body>
-	<body onload="RestControllerModule.getOrders();">
+	<body onload="OrdersControllerModule.showOrdersByTable()">
 </html>
