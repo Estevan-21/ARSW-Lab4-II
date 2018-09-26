@@ -22,57 +22,49 @@
     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
         <div class="inner">                            
-            <H1>UPDATE ORDERS</H1>                                     
+           <H1>UPDATE ORDERS</H1>
         </div>
       </header>            	
       <main role="main" class="inner cover">
-	<style type="text/css">
-		#caja_izq {width: 850px;
-		margin: 20px auto;
-		color:#fff;
-		background-color: #4c9ab1;
-		overflow: auto;
-		}
-		#caja_der {width: 500px;
-		float: right;
-		background-color: #82b04d;
-		border-left: solid 30px #fff;
-		}
-		.columna_izquierda {width: 280px;
+	<style type="text/css">				
+		.columna_izquierda {width: 500px;
 		float: left;
-		padding: 20px;
-		position: relative;
-		margin-left: -350px;
+		height: 10px;		
+		margin-left: -400px;
 		}
-		.columna_derecha {width: 450px;
-		float: left;
-		padding: 20px;
+		.columna_derecha {width: 200px;
+		float: right;	
+		margin-left: 200px;
+		height: 400px;		
 		}
+		.columna_centro {width: 200px;
+		float: center;
+		padding: 20px;	
+		height: 10px;			
+		}		
 	</style>
-	<footer class="mastfoot mt-auto">
-        <div id="selector" class="columna_izquierda">
-			<select name="transporte">
+	<div >
+		<div id="selector" class="columna_izquierda">
+			<select name="Tables">
 			<option>Table 1</option>
 			<option>Table 2</option>		
 			</select>
 		</div>
-		<div id="Entradas" class="columna_derecha">
-			 <form>
-			  Item name:<br>
-			  <input type="text" name="itemName"><br>
-			  Quantity:<br>
-			  <input type="text" name="quantity">
-			</form> 			
+		<div id="Entradas" class="columna_centro">
+		   <p>Item Name: <input type="text" name="name"></p>
+		   <p>Quantity: <input type="text" name="quantity"></p>
+		</div>	
+		<div id="buton" class="columna_derecha">
+			<button id="button">Add</button> 
 		</div>		
-      </footer>
-      
+	</div>
         
-      </main>
+    </main>
       <footer class="mastfoot mt-auto">
         <div class="inner">
           <p>Lab 4 Parte II API RESTAURANT</p>
         </div>
-      </footer>
+    </footer>
       
 
 
