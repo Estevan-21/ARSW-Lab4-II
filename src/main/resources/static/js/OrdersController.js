@@ -1,10 +1,9 @@
 var OrdersControllerModule = (function () {
 
   var showOrdersByTable = function () {  	
-	  console.log("SHOW1");
+	var cont=1;
     var callback = {
-        onSuccess: function(ord){
-			var cont=1;
+        onSuccess: function(ord){			
             console.log("SHOW");
             console.log(ord);	
 			var ord3=JSON.stringify(ord);   
@@ -18,7 +17,7 @@ var OrdersControllerModule = (function () {
 				console.log("TER");
 			  var tablas=document.getElementById('table');
 			   
-			  var textoHTML= '<table id='+cont+' class="table table-striped table-sm"> <thead> <tr> <th>Product</th> <th>Quantity</th> </tr> </thead> <tbody id="OrdersBody">';
+			  var textoHTML='<div class="inner"><H3> Table '+ cont +'</H3></div> <table id='+cont+' class="table table-striped table-sm"> <thead> <tr> <th>Product</th> <th>Quantity</th> </tr> </thead> <tbody id="OrdersBody">';
 			  
 			  for (i=0;i < ord3.length;i++){
 				ord3[i]=ord3[i].split(":");
@@ -30,7 +29,8 @@ var OrdersControllerModule = (function () {
 				}
 				console.log("TER2");  
 			  textoHTML+="</tbody> </table>" 			  
-			tablas.innerHTML+=textoHTML;			
+			tablas.innerHTML+=textoHTML;
+			cont=cont+1;			
             },
         onFailed: function(exception){
 			console.log(exception);
