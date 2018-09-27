@@ -1,12 +1,9 @@
 var RestControllerModule = (function () {	
 
   var getOrders = function (callback) {
-    axios.get('/orders').then(function (response) {		
-			console.log(response.data);                  
-            var ord=response.data['1'].orderAmountsMap;   
-            console.log("BIEN2");  
-            callback.onSuccess(ord);                                   
-            console.log("BIEN3");            
+    axios.get('/orders').then(function (response) {					                 
+            var ord=response.data['1'].orderAmountsMap;               
+            callback.onSuccess(ord);                                                          
             var ord=response.data['3'].orderAmountsMap;
             callback.onSuccess(ord);     
                                                               
